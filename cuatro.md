@@ -1,68 +1,59 @@
 
-# 💬 Sentiment Heatmap – 50 User Reviews (Digital Camera) [Go back to Portfolio](https://github.com/Tlaloxx)
+# Sentiment Heatmap – 50 User Reviews (Digital Camera)
 
-**By Tlaloc Álvarez**  
-📍 Mexico City | 💼 Role: Data Analyst  
-🧰 Tools: Python · pandas · TextBlob · Matplotlib · Seaborn  
+![Digital Camera Reviews](cuatro.png)
 
----
-
-## 🧠 Overview
-
-This project demonstrates how to extract **customer sentiment** from written feedback and transform it into meaningful visualizations.  
-Although we analyze reviews for a **digital camera**, this approach is applicable to **any product or service** that receives open-text comments.
-
-> **Why it matters:** Text reviews hide valuable insights. Analyzing tone and sentiment helps teams detect pain points, guide product improvements, and support data-driven decisions.
+This notebook shows how to analyze user comments using sentiment analysis.  
+Although we use digital camera reviews, this approach works for any product or service.
 
 ---
 
-## 🖼️ Product Context
+### Step 1: Import libraries
 
-To visualize what kind of reviews we are analyzing, here’s a sample product:
-
-![Digital Camera](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Digital_Camera_20060313.jpg/800px-Digital_Camera_20060313.jpg)  
-<sub>📸 Example image – Wikimedia Commons</sub>
-
----
-
-## 🔍 Step 1: Load and Prepare the Data
-
-We load the dataset, which includes customer comments, and remove empty ones.
+We import essential libraries for data handling, plotting, and sentiment analysis.
 
 ```python
 import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+import seaborn as sns
+from textblob import TextBlob
+from matplotlib.colors import LinearSegmentedColormap
 
-df = pd.read_csv("digital_camera_reviews.csv")
-df = df.dropna(subset=['comment'])  # Remove empty comments
-df[['comment']].head()
+%matplotlib inline
 ```
 
 ---
 
-## 🧠 Step 2: Analyze Sentiment with TextBlob
+### Step 2: Load and clean the dataset
 
-Using `TextBlob`, we calculate a sentiment score for each comment.  
-- Score ranges from **-1** (negative) to **+1** (positive)
+We read a CSV with customer reviews and remove entries with missing text.
 
 ```python
-from textblob import TextBlob
+df = pd.read_csv("digital_camera_reviews.csv")
+df = df.dropna(subset=['comment'])  # Remove empty comments
+```
 
+---
+
+### Step 3: Analyze sentiment
+
+Using TextBlob, we score each comment from -1 (negative) to +1 (positive).
+
+```python
 df['sentiment_score'] = df['comment'].apply(lambda x: TextBlob(str(x)).sentiment.polarity)
 ```
 
 ---
 
-## 🔢 Step 3: Prepare Data for Heatmap
+### Step 4: Prepare data for the heatmap
 
-We select the first 50 sentiment scores and reshape them for a 5x10 heatmap grid.
+We extract the first 50 reviews and shape them into a 5x10 matrix.
 
 ```python
-import numpy as np
-
 data = df['sentiment_score'].values[:50]
 rows, cols = 5, 10
 
-# Pad with NaNs if there are fewer than 50 values
 if len(data) < rows * cols:
     data = np.append(data, [np.nan] * (rows * cols - len(data)))
 
@@ -71,13 +62,11 @@ heat_matrix = np.reshape(data, (rows, cols))
 
 ---
 
-## 🎨 Step 4: Create a Custom Blue Colormap
+### Step 5: Create a color palette
 
-We define a soft blue gradient for easier interpretation of tone.
+We define a smooth blue color gradient for the heatmap.
 
 ```python
-from matplotlib.colors import LinearSegmentedColormap
-
 blue_cmap = LinearSegmentedColormap.from_list(
     "gray_to_blue",
     ["#f5f5f5", "#90caf9", "#42a5f5", "#1565c0"],
@@ -87,14 +76,11 @@ blue_cmap = LinearSegmentedColormap.from_list(
 
 ---
 
-## 📊 Step 5: Visualize with Heatmap and Trendline
+### Step 6: Plot results
 
-We plot a heatmap (grid of reviews) and a line chart (sentiment over time).
+We show a heatmap of 50 comments and a line chart of sentiment trends.
 
 ```python
-import seaborn as sns
-import matplotlib.pyplot as plt
-
 fig, axs = plt.subplots(2, 1, figsize=(12, 6), gridspec_kw={"height_ratios": [2, 1]}, constrained_layout=True)
 
 # Heatmap
@@ -111,7 +97,7 @@ sns.heatmap(
 )
 axs[0].set_title("Sentiment Heatmap – 50 Digital Camera Reviews", fontsize=13, weight='bold')
 
-# Line Chart
+# Line Plot
 axs[1].plot(range(1, len(data)+1), data, marker='o', linestyle='-', color='#1976d2', linewidth=2)
 axs[1].fill_between(range(1, len(data)+1), data, color="#bbdefb", alpha=0.5)
 axs[1].axhline(0, color='gray', linestyle='--', linewidth=1)
@@ -127,42 +113,8 @@ plt.show()
 
 ---
 
-## 💡 Business Value & Impact
+### Conclusion
 
-This kind of analysis is simple but powerful:
+This method helps identify customer emotions, improve product feedback loops, and support better business decisions.
 
-- 🎯 Helps product teams **identify features that users love or dislike**
-- 📢 Supports marketing with **real emotional tone for campaign alignment**
-- ⚠️ Flags potential **quality issues early** from negative feedback trends
-- 💬 Enhances **customer understanding** from raw feedback data
-
-> 📌 This method can be applied to feedback from **apps, services, courses, events**, and more.
-
----
-
-## 🗂 File Structure
-
-```
-sentiment-heatmap/
-├── digital_camera_reviews.csv
-├── sentiment_analysis.ipynb
-├── sentiment_heatmap.png
-└── README.md
-```
-
----
-
-## ⏭️ Ideas for Future Work
-
-- Group reviews by **topics or product features**  
-- Apply **topic modeling** (e.g., LDA or BERTopic)  
-- Build an **interactive dashboard** with Streamlit  
-- Include **subjectivity** for emotional depth  
-
----
-
-## 🔁 Back to Portfolio
-
-[← View All Projects](https://github.com/Tlaloxx)
-
-
+[← Back to Portfolio](https://github.com/Tlaloxx)
