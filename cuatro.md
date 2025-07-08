@@ -1,37 +1,28 @@
+
 # 📷 Sentiment Visualization – Digital Camera Reviews
 
+![Sentiment Heatmap](https://github.com/Tlaloxx/Tlaloxx/blob/main/cuatro.png)
+
 **By Tlaloc Álvarez**  
-💼 *Role:* Data Analyst  
-🧰 *Tools:* Python · pandas · TextBlob · Matplotlib · Seaborn
+🧰 Python · pandas · TextBlob · Matplotlib · Seaborn  
 
 ---
 
-## 🧠 Overview
+## Overview
 
-This project shows how to extract value from open-text reviews using **sentiment analysis**.  
-We analyzed real customer feedback from a **digital camera** to understand user emotion and trends.
-
-> **Why it matters:** Customer reviews hold insights. We turned emotion into data to guide business strategy.
+This project analyzes customer reviews of a digital camera to uncover sentiment trends and business insights.
 
 ---
 
-## 🎯 Objectives
+## Goals
 
-- Score customer sentiment from raw text  
-- Spot patterns and spikes in negative feedback  
-- Visualize emotion through simple, effective charts  
-- Generate insights for product and marketing teams  
-
----
-
-## 🖼 Product Context
-
-![Digital Camera](https://upload.wikimedia.org/wikipedia/commons/thumb/3/3e/Digital_Camera_20060313.jpg/800px-Digital_Camera_20060313.jpg)  
-<sub>Example device – Wikimedia Commons</sub>
+- Transform raw text into sentiment scores  
+- Visualize trends to support product strategy  
+- Highlight areas for product and marketing improvements  
 
 ---
 
-## 📄 Sample Data Preview
+## Sample Data
 
 ```python
 df = pd.read_csv("digital_camera_reviews.csv")
@@ -41,7 +32,7 @@ df[['comment']].head()
 
 ---
 
-## 🧪 Sentiment Scoring
+## Sentiment Analysis
 
 ```python
 from textblob import TextBlob
@@ -50,35 +41,22 @@ df['sentiment_score'] = df['comment'].apply(lambda x: TextBlob(str(x)).sentiment
 
 ---
 
-## 🔥 Visualization
+## Visualization
 
 ```python
-# First 50 scores → heatmap and line chart
-# (custom blue colormap for clarity and tone)
-
-sns.heatmap(...); plt.plot(...); plt.show()
+# Heatmap and line plot of sentiment
+# Blue gradient shows polarity intensity from -1 to +1
 ```
 
 ---
 
-## 💡 Business Insights
+## Business Impact
 
-- Detect common user pain points from negative trends  
-- Guide product fixes and feature improvements  
-- Support marketing tone with real feedback  
-- Spot early warning signs before complaints escalate  
-
----
-
-## 🚀 What’s Next?
-
-- Group by product features (battery, price, etc.)  
-- Add topic modeling for deeper analysis  
-- Build dashboard for real-time review tracking  
-- Detect urgency and emotion levels  
+- Detect dissatisfaction patterns for early resolution  
+- Support marketing messages with real user feedback  
+- Monitor sentiment changes over time  
 
 ---
 
-## 🔁 Back to Home
+[🔙 Back to Portfolio](https://github.com/Tlaloxx)
 
-[← Return to my GitHub Portfolio](https://github.com/Tlaloxx)
