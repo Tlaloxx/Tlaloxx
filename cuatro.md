@@ -3,12 +3,12 @@
 
 ![Digital Camera Heatmap](https://github.com/Tlaloxx/Tlaloxx/blob/main/cuatro.png)
 
-Este análisis muestra cómo podemos extraer valor de negocio a partir de comentarios de clientes.  
-Se puede aplicar fácilmente a cualquier producto o servicio que recopile opiniones abiertas.
+This analysis demonstrates how we can extract business value from customer feedback.  
+It can be easily applied to any product or service that collects open-ended reviews.
 
 ---
 
-## Paso 1: Importar librerías
+## Step 1: Import libraries
 
 ```python
 import pandas as pd
@@ -23,17 +23,17 @@ from matplotlib.colors import LinearSegmentedColormap
 
 ---
 
-## Paso 2: Cargar el dataset y mostrar los primeros valores
+## Step 2: Load dataset and preview first values
 
 ```python
 df = pd.read_csv("digital_camera_reviews.csv")
-df = df.dropna(subset=['comment'])  # Eliminar comentarios vacíos
+df = df.dropna(subset=['comment'])  # Remove empty comments
 df[['comment']].head()
 ```
 
 ---
 
-## Paso 3: Análisis de sentimiento con TextBlob
+## Step 3: Sentiment analysis using TextBlob
 
 ```python
 df['sentiment_score'] = df['comment'].apply(lambda x: TextBlob(str(x)).sentiment.polarity)
@@ -41,7 +41,7 @@ df['sentiment_score'] = df['comment'].apply(lambda x: TextBlob(str(x)).sentiment
 
 ---
 
-## Paso 4: Seleccionar 50 valores y dar forma para la visualización
+## Step 4: Select 50 values and reshape for visualization
 
 ```python
 data = df['sentiment_score'].values[:50]
@@ -55,7 +55,7 @@ heat_matrix = np.reshape(data, (rows, cols))
 
 ---
 
-## Paso 5: Crear el mapa de color
+## Step 5: Create custom blue colormap
 
 ```python
 blue_cmap = LinearSegmentedColormap.from_list(
@@ -67,7 +67,7 @@ blue_cmap = LinearSegmentedColormap.from_list(
 
 ---
 
-## Paso 6: Visualizar los resultados
+## Step 6: Visualize the results
 
 ```python
 fig, axs = plt.subplots(2, 1, figsize=(12, 6), gridspec_kw={"height_ratios": [2, 1]}, constrained_layout=True)
@@ -100,17 +100,18 @@ plt.show()
 
 ---
 
-## Conclusión: ¿Por qué es útil este análisis?
+## Conclusion: Why is this analysis useful?
 
-Este tipo de análisis de sentimiento permite a las empresas:
-- Detectar problemas antes de que escalen, actuando proactivamente sobre comentarios negativos.
-- Mejorar productos y servicios basados en emociones reales de los clientes.
-- Apoyar decisiones en marketing y experiencia del usuario con datos claros y visuales.
-- Convertir opiniones en texto en información estratégica accionable.
+This type of sentiment analysis allows companies to:
+- Detect problems early and act proactively on negative feedback.
+- Improve products and services based on real customer emotions.
+- Support marketing and UX decisions with clear and visual data.
+- Turn free-text feedback into strategic, actionable insights.
 
-Como analista de datos, aportar este tipo de valor convierte las emociones en decisiones reales.  
-Esto me permite contribuir directamente a la mejora continua de productos y la satisfacción del cliente.
+As a data analyst, delivering this kind of value turns emotion into business decisions.  
+It enables me to directly support product improvement and customer satisfaction.
 
 ---
 
-[← Volver al portafolio](https://github.com/Tlaloxx)
+[← Back to portfolio](https://github.com/Tlaloxx)
+
