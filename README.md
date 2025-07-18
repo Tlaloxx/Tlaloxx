@@ -1,6 +1,6 @@
 <h2 align="center">📊 Data Projects Portfolio</h2>
 <p align="center"><i>Click a project to explore</i></p>
-<p align="center">Tech Stack: Excel · Power BI · Salesforce CRM · Python · SQL (learning)</p>
+<p align="center">Tech Stack: Excel · Power BI · Salesforce CRM · Python · SQL </p>
 
 <div align="center">
 
