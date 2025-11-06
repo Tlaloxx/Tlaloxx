@@ -164,3 +164,29 @@ plt.show()
 ```
 
 ---
+
+```
+from wordcloud import WordCloud
+
+neg_text = " ".join([w for w, _ in neg_words])
+pos_text = " ".join([w for w, _ in pos_words])
+
+neg_wc = WordCloud(width=600, height=400, background_color='white', colormap='Reds').generate(neg_text)
+pos_wc = WordCloud(width=600, height=400, background_color='white', colormap='Greens').generate(pos_text)
+
+plt.figure(figsize=(12,5))
+plt.subplot(1,2,1)
+plt.imshow(neg_wc, interpolation='bilinear')
+plt.axis('off')
+plt.title("🔴 Frustraciones más comunes")
+
+plt.subplot(1,2,2)
+plt.imshow(pos_wc, interpolation='bilinear')
+plt.axis('off')
+plt.title("🟢 Valoraciones más comunes")
+plt.show()
+```
+
+---
+
+
