@@ -19,8 +19,6 @@ import matplotlib.pyplot as plt
 import re
 from collections import Counter
 
-plt.style.use('seaborn-whitegrid')
-pd.options.display.max_colwidth = 200
 ```
 
 ---
@@ -50,7 +48,7 @@ print("Rango de fechas:", df['date'].min(), "→", df['date'].max())
 _Explicación:_ vemos la actividad por mes; picos suelen indicar lanzamientos o regresiones.
 
 ```python
-reviews_per_month = df.set_index('date').resample('M')['score'].count().fillna(0)
+reviews_per_month = df.set_index('date').resample('ME')['score'].count().fillna(0)
 plt.figure(figsize=(9,3))
 plt.plot(reviews_per_month.index, reviews_per_month.values, marker='o')
 plt.title("Reseñas por mes")
